@@ -7,7 +7,6 @@ import {
   X, ArrowLeft, Star, History, ExternalLink
 } from 'lucide-react';
 import { api } from '../services/api';
-import { useNavigate } from 'react-router-dom';
 
 function formatItinerary(plan) {
   if (!plan) return null;
@@ -105,7 +104,6 @@ export default function TripPlanner() {
   const [refinementInput, setRefinementInput] = useState("");
   const [isRefining, setIsRefining] = useState(false);
   const [recentSearches, setRecentSearches] = useState([]);
-  const navigate = useNavigate();
 
   const isStep1Valid = formData.destination.trim() !== '' && formData.startDate !== '' && formData.endDate !== '';
   const isStep3Valid = formData.interests.length > 0;
@@ -319,27 +317,6 @@ export default function TripPlanner() {
             >
               <ExternalLink className="w-5 h-5" /> View Dynamic Plan
             </button>
-            {isLoggedIn ? (
-              <button 
-                onClick={handleSaveItinerary} 
-                disabled={saving}
-                className="px-8 py-4 bg-teal-500 hover:bg-teal-600 disabled:bg-teal-400 text-white rounded-xl font-bold shadow-lg shadow-teal-500/30 flex items-center gap-2 transition"
-              >
-                <Sparkles className="w-5 h-5" />
-                {saving ? 'Saving...' : 'Save to My Trips'}
-              </button>
-            ) : (
-              <button 
-                onClick={() => {
-                  alert('Please sign in or register to save itineraries to your dashboard!');
-                  navigate('/login');
-                }} 
-                className="px-8 py-4 bg-teal-500 hover:bg-teal-600 text-white rounded-xl font-bold shadow-lg shadow-teal-500/30 flex items-center gap-2 transition"
-              >
-                <Sparkles className="w-5 h-5" />
-                Save to My Trips
-              </button>
-            )}
           </div>
         </div>
       </div>
@@ -576,4 +553,4 @@ export default function TripPlanner() {
       </footer>
     </div>
   );
-}
+} 
